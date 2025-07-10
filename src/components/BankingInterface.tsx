@@ -98,6 +98,9 @@ const BankingInterface = () => {
         <div className="terminal-text text-4xl md:text-6xl font-bold text-primary mb-2 glitch">
           ░P░R░I░V░A░C░Y░-░P░O░O░L░
         </div>
+        <div className="terminal-text text-lg md:text-2xl text-primary/80 mb-4 animate-pulse">
+          &gt;&gt; your favorite privacy pools now in Noir &lt;&lt;
+        </div>
         <div className="terminal-text text-lg text-accent">
           {terminalText}<span className="blink">█</span>
         </div>
