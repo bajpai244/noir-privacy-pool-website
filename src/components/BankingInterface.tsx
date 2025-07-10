@@ -29,7 +29,7 @@ const BankingInterface = () => {
   }, []);
 
   useEffect(() => {
-    const text = 'RETRO-BANK TERMINAL v2.1 READY...';
+    const text = 'NOIR-PRIVACY-POOL TERMINAL v2.1 READY...';
     let i = 0;
     const typeWriter = () => {
       if (i < text.length) {
@@ -96,7 +96,7 @@ const BankingInterface = () => {
       {/* Header */}
       <div className="mb-8 text-center">
         <div className="terminal-text text-4xl md:text-6xl font-bold text-primary mb-2 glitch">
-          ░R░E░T░R░O░-░B░A░N░K░
+          ░N░O░I░R░-░P░R░I░V░A░C░Y░-░P░O░O░L░
         </div>
         <div className="terminal-text text-lg text-accent">
           {terminalText}<span className="blink">█</span>
@@ -240,7 +240,7 @@ const BankingInterface = () => {
           ░░░ SECURE CONNECTION ESTABLISHED ░░░
         </div>
         <div>
-          © 2024 RETRO-BANK SYSTEMS • ALL TRANSACTIONS ENCRYPTED
+          © 2024 NOIR-PRIVACY-POOL SYSTEMS • ALL TRANSACTIONS ENCRYPTED
         </div>
       </div>
     </div>
