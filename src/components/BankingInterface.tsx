@@ -14,17 +14,10 @@ interface Transaction {
 }
 
 const BankingInterface = () => {
-  const [balance, setBalance] = useState(1000.00);
+  const [accountBalance, setAccountBalance] = useState(1000.00);
+  const [poolBalance, setPoolBalance] = useState(0.00);
   const [amount, setAmount] = useState('');
-  const [transactions, setTransactions] = useState<Transaction[]>([
-    {
-      id: '1',
-      type: 'deposit',
-      amount: 500,
-      date: new Date(Date.now() - 86400000),
-      description: 'Initial deposit'
-    }
-  ]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [terminalText, setTerminalText] = useState('');
 
@@ -50,14 +43,15 @@ const BankingInterface = () => {
 
   const handleDeposit = () => {
     const depositAmount = parseFloat(amount);
-    if (depositAmount > 0) {
-      setBalance(prev => prev + depositAmount);
+    if (depositAmount > 0 && depositAmount <= accountBalance) {
+      setAccountBalance(prev => prev - depositAmount);
+      setPoolBalance(prev => prev + depositAmount);
       const newTransaction: Transaction = {
         id: Date.now().toString(),
         type: 'deposit',
         amount: depositAmount,
         date: new Date(),
-        description: `Deposit via terminal`
+        description: `Deposit to pool`
       };
       setTransactions(prev => [newTransaction, ...prev]);
       setAmount('');
@@ -66,14 +60,15 @@ const BankingInterface = () => {
 
   const handleWithdrawal = () => {
     const withdrawAmount = parseFloat(amount);
-    if (withdrawAmount > 0 && withdrawAmount <= balance) {
-      setBalance(prev => prev - withdrawAmount);
+    if (withdrawAmount > 0 && withdrawAmount <= poolBalance) {
+      setPoolBalance(prev => prev - withdrawAmount);
+      setAccountBalance(prev => prev + withdrawAmount);
       const newTransaction: Transaction = {
         id: Date.now().toString(),
         type: 'withdrawal',
         amount: withdrawAmount,
         date: new Date(),
-        description: `Withdrawal via terminal`
+        description: `Withdrawal from pool`
       };
       setTransactions(prev => [newTransaction, ...prev]);
       setAmount('');
@@ -119,10 +114,24 @@ const BankingInterface = () => {
             <DollarSign className="text-accent" size={24} />
           </div>
           <div className="terminal-text text-3xl font-bold text-accent mb-2">
-            {formatCurrency(balance)}
+            {formatCurrency(accountBalance)}
           </div>
           <div className="text-sm text-muted-foreground">
             Available Funds
+          </div>
+        </Card>
+
+        {/* Pool Balance */}
+        <Card className="retro-card col-span-full lg:col-span-1">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="terminal-text text-xl font-bold text-primary">POOL BALANCE</h2>
+            <DollarSign className="text-accent" size={24} />
+          </div>
+          <div className="terminal-text text-3xl font-bold text-accent mb-2">
+            {formatCurrency(poolBalance)}
+          </div>
+          <div className="text-sm text-muted-foreground">
+            Pool Funds
           </div>
         </Card>
 
@@ -152,7 +161,7 @@ const BankingInterface = () => {
             <div className="grid grid-cols-2 gap-4">
               <Button
                 onClick={handleDeposit}
-                disabled={!amount || parseFloat(amount) <= 0}
+                disabled={!amount || parseFloat(amount) <= 0 || parseFloat(amount) > accountBalance}
                 className="retro-button bg-primary hover:bg-primary/90"
               >
                 <TrendingUp className="mr-2" size={20} />
@@ -161,7 +170,7 @@ const BankingInterface = () => {
               
               <Button
                 onClick={handleWithdrawal}
-                disabled={!amount || parseFloat(amount) <= 0 || parseFloat(amount) > balance}
+                disabled={!amount || parseFloat(amount) <= 0 || parseFloat(amount) > poolBalance}
                 className="retro-button bg-destructive hover:bg-destructive/90 border-destructive"
                 style={{ 
                   boxShadow: '4px 4px 0px hsl(var(--destructive))',
