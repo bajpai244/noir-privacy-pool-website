@@ -106,9 +106,9 @@ const BankingInterface = () => {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="max-w-6xl mx-auto grid gap-6 grid-cols-1 lg:grid-cols-3">
         {/* Account Balance */}
-        <Card className="retro-card col-span-full lg:col-span-1">
+        <Card className="retro-card">
           <div className="flex items-center justify-between mb-4">
             <h2 className="terminal-text text-xl font-bold text-primary">ACCOUNT BALANCE</h2>
             <DollarSign className="text-accent" size={24} />
@@ -122,7 +122,7 @@ const BankingInterface = () => {
         </Card>
 
         {/* Pool Balance */}
-        <Card className="retro-card col-span-full lg:col-span-1">
+        <Card className="retro-card">
           <div className="flex items-center justify-between mb-4">
             <h2 className="terminal-text text-xl font-bold text-primary">POOL BALANCE</h2>
             <DollarSign className="text-accent" size={24} />
@@ -136,7 +136,7 @@ const BankingInterface = () => {
         </Card>
 
         {/* Transaction Interface */}
-        <Card className="retro-card col-span-full lg:col-span-2">
+        <Card className="retro-card">
           <div className="flex items-center justify-between mb-6">
             <h2 className="terminal-text text-xl font-bold text-primary">TRANSACTION TERMINAL</h2>
             <Monitor className="text-accent" size={24} />
