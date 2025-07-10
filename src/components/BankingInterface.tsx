@@ -96,7 +96,7 @@ const BankingInterface = () => {
       {/* Header */}
       <div className="mb-8 text-center">
         <div className="terminal-text text-4xl md:text-6xl font-bold text-primary mb-2 glitch">
-          ░N░O░I░R░-░P░R░I░V░A░C░Y░-░P░O░O░L░
+          ░P░R░I░V░A░C░Y░-░P░O░O░L░
         </div>
         <div className="terminal-text text-lg text-accent">
           {terminalText}<span className="blink">█</span>
